@@ -50,7 +50,7 @@ module.exports = function (env = {}) {
 
     const IS_PROD = process.env.NODE_ENV === 'production' ? true : false;
     const MODE = IS_PROD ? "production" : "development";
-    const DEV_TOOL = IS_PROD ? "source-map" : "cheap-eval-source-map";
+    const DEV_TOOL = IS_PROD ? "source-map" : "eval";
 
     var publicPath = path.resolve(__dirname, 'public');
     var jsPath = path.resolve(publicPath, 'compiled');
@@ -111,8 +111,10 @@ module.exports = function (env = {}) {
             extractComments: false
         })]
     } else {
-        jsEntries[HANDMADE_LIVE_RELOAD] = path.resolve(HandmadeLiveReload.path_to_client);
-        devPlugins.push(new HandmadeLiveReload.plugin());
+        if (HandmadeLiveReload) {
+            jsEntries[HANDMADE_LIVE_RELOAD] = path.resolve(HandmadeLiveReload.path_to_client);
+            devPlugins.push(new HandmadeLiveReload.plugin());
+        }
     }
 
 
@@ -130,14 +132,16 @@ module.exports = function (env = {}) {
         module: {
           rules: [
             {
-              test: /\.css$/, loader: "style-loader!css-loader"
+              test: /\.css$/,
+                use: [
+                    "style-loader",
+                    "!css-loader"
+                ]
+
             },
             {
               test: /\.sass$/,
               use: [
-                  // "style-loader", // creates style nodes from JS strings
-                  // "css-loader", // translates CSS into CommonJS
-                  // "sass-loader" // compiles Sass to CSS, using Node Sass by default
                   MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
               ]
             },

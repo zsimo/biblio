@@ -7,14 +7,14 @@
     "fastify-static": "^3.2.0",
     "handmade-livereload-webpack-plugin": "^1.0.9",
     "html-webpack-plugin": "^4.5.0",
-    "mini-css-extract-plugin": "^0.11.2",
+    "mini-css-extract-plugin": "^1.0.0",
     "node-sass": "^4.14.1",
     "pm2": "^4.5.0",
     "sass-loader": "^10.0.2",
-    "style-loader": "^1.2.1",
+    "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.2",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
   },
   "scripts": {
     "log": "pm2 log",
