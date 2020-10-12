@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>biblio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+        <script src="https://get.mavo.io/mavo.min.js"></script>
+        <link rel="stylesheet" href="https://get.mavo.io/mavo.min.css">
+    </head>
+    <body>
+
+        <form method="post" action="/biblioupload" enctype="multipart/form-data">
+         <div>
+           <label for="file">Choose file to upload</label>
+           <input type="file" id="file" name="file" multiple>
+         </div>
+         <div>
+           <button>Submit</button>
+         </div>
+        </form>
+
+
+        <div mv-app id="biblio" mv-storage="https://github.com/zsimo/biblio/data.json"  mv-upload-url="http://simonedev/biblio">
+
+
+            <label>
+                Email:
+                <input type="email" property="email" value="foo@example.com" />
+            </label>
+            <label>
+                Message:
+                <textarea property="message">
+                    Edit the form and notice how the values persist after you refresh!
+                </textarea>
+            </label>
+
+        </div>
+    </body>
+</html>

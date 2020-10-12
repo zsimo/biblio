@@ -65,7 +65,7 @@ module.exports = function (env = {}) {
         }
 
         var option = {
-            template:`${srcPath}/templates/index.ejs`,
+            template:`${srcPath}/templates/index.html`,
             chunks: chunks,
             filename: `${publicPath}/${page}/index.html`,
             // respect the array order

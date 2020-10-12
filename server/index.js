@@ -7,10 +7,26 @@ var fastify = require('fastify')();
 var config = require(path.resolve(process.cwd(), "server", "config"));
 var publicPath = path.resolve(process.cwd(), "public");
 
+// fastify.register(require('fastify-file-upload'))
+
 
 fastify.register(require('fastify-static'), {
     root: publicPath,
     prefix: '/'
+});
+
+fastify.addHook('onRequest', async function (request, reply) {
+
+    console.log(request.raw.url);
+
+});
+
+fastify.get('/ciao', async function (request, reply) {
+
+
+    reply.send("ciao")
+
+
 });
 
 
