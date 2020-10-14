@@ -8,7 +8,7 @@ var fastify = require('fastify')({
 });
 var writeFile = require(path.resolve(process.cwd(), "server", "faas", "write_file"));
 var readBarCode = require(path.resolve(process.cwd(), "server", "faas", "read_bar_code"));
-
+var isbnSearchJob = require(path.resolve(process.cwd(), "server", "jobs", "isbn_search.js"));
 
 var port = config.SERVER_PORT;
 var publicPath = path.resolve(process.cwd(), "public");
@@ -49,6 +49,14 @@ fastify.addHook('onRequest', async function (request, reply) {
 
 });
 
+fastify.get("/book/:isbn", async function (request, reply) {
+    
+    var isbn = request.params.isbn;
+    var book = await isbnSearchJob(isbn);
+    console.log(book)
+    reply.send("ok");
+
+});
 
 fastify.post('/upload', async function (request, reply) {
     // some code to handle file

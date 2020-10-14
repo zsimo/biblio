@@ -11,12 +11,13 @@ var isbn = path.resolve(process.cwd(), "uploads", "isbn.jpg");
 //getIsbnFromFileJob(isbn);
 
 var isbn = require('node-isbn');
-
-isbn.resolve('9780134757599', function (err, book) {
+// 9788806173104
+//
+isbn.resolve('0735619670', function (err, book) {
     if (err) {
         console.log('Book not found', err);
     } else {
-        console.log(JSON.stringify(book, null, 2));
+        console.log('Book found %j', book);
     }
 });
 

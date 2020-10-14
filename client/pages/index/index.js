@@ -1,5 +1,9 @@
 "use strict";
+
+var axios = require("axios");
+
 var Quagga = window.Quagga;
+
 var App = {
     _scanner: null,
     init: function() {
@@ -9,6 +13,9 @@ var App = {
         var scanner = this.configureScanner('.overlay__content'),
             onDetected = function (result) {
                 document.querySelector('input.isbn').value = result.codeResult.code;
+                axios.get("http://localhost:3000/book/" + result.codeResult.code, function (result) {
+                    console.log(result);
+                });
                 stop();
             }.bind(this),
             stop = function() {

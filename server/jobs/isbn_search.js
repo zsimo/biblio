@@ -1,13 +1,20 @@
 "use strict";
 
-var fs = require('fs');
-var path = require("path");
+var isbnService = require('node-isbn');
 
-module.exports = async function (isbn) {
+module.exports = function (isbn) {
 
-    // file.name
-    // file.data // buffer
+    return new Promise(function (resolve, reject) {
 
+        isbnService.resolve(isbn, function (err, book) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(book);
+            }
+        });
+
+    });
 
 
 };
