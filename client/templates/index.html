@@ -2,23 +2,35 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="Feature-Policy: camera 'self'">
         <title>biblio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-        <script src="https://get.mavo.io/mavo.min.js"></script>
+
         <link rel="stylesheet" href="https://get.mavo.io/mavo.min.css">
+            <link rel="canonical" href="https://serratus.github.io/v1.0.0-beta.1/examples/scan-to-input/" />
+            <link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/styles.css">
+            <link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/example.css">
+            <link rel="stylesheet" href="https://serratus.github.io/quaggaJS/stylesheets/pygment_trac.css">
+
+        <script src="https://serratus.github.io/quaggaJS/v1.0.0-beta.1/examples/js/quagga.js"></script>
+       <script src="https://serratus.github.io/quaggaJS/javascripts/scale.fix.js"></script>
+
     </head>
     <body>
 
-        <form method="post" action="/biblio/upload" enctype="multipart/form-data">
-         <div>
-           <label for="file">Choose file to upload</label>
-           <input type="file" id="file" name="file" multiple>
-         </div>
-         <div>
-           <button>Submit</button>
-         </div>
+  <h3>Scan barcode to input-field</h3>
+    <p>Click the <strong>button</strong> next to the input-field
+        to start scanning an <strong>EAN-13</strong> barcode</p>
+    <div>
+        <form>
+            <div class="input-field">
+                <label for="isbn_input">EAN:</label>
+                <input id="isbn_input" class="isbn" type="text" />
+                <button type="button" class="icon-barcode button scan">&nbsp;</button>
+            </div>
         </form>
+    </div>
 
 
         <div mv-app id="biblio" mv-storage="https://github.com/zsimo/biblio/data.json"  mv-upload-url="http://simonedev/biblio">
