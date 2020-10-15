@@ -11,13 +11,16 @@ var isbn = path.resolve(process.cwd(), "uploads", "isbn.jpg");
 //getIsbnFromFileJob(isbn);
 
 var isbn = require('node-isbn');
+// console.log(isbn.PROVIDER_NAMES)
+// return;
 // 9788806173104
-//
-isbn.resolve('0735619670', function (err, book) {
+// 0735619670
+isbn.provider([isbn.PROVIDER_NAMES.GOOGLE, isbn.PROVIDER_NAMES.OPENLIBRARY/*, isbn.PROVIDER_NAMES.WORLDCAT,  isbn.PROVIDER_NAMES.ISBNDB*/])
+    .resolve('0735619670', function (err, book) {
     if (err) {
         console.log('Book not found', err);
     } else {
-        console.log('Book found %j', book);
+        console.log(JSON.stringify(book, null, 2));
     }
 });
 
