@@ -3,12 +3,24 @@
 
 var path = require("path");
 // var readBarCode = require(path.resolve(process.cwd(), "server", "faas", "read_bar_code"));
-var getIsbnFromFileJob = require(path.resolve(process.cwd(), "server", "operations", "get_isbn_from_img"));
+var getIsbnFromFileOperation = require(path.resolve(process.cwd(), "server", "operations", "get_isbn_from_img"));
 var rawFile = path.resolve(process.cwd(), "uploads", "test.jpg");
 var dest = path.resolve(process.cwd(), "uploads", "dest.jpg");
-var isbn = path.resolve(process.cwd(), "uploads", "isbn.jpg");
+var isbn = path.resolve(process.cwd(), "uploads", "isbn.png");
 
-//getIsbnFromFileJob(isbn);
+getIsbnFromFileOperation(isbn).then(function (result) {
+    console.log(result)
+}).catch(function (err) {
+    console.log(err);
+});
+
+return;
+
+const oldIsbn = '0735619670';
+const isbnVallortigara = 9788845934964;
+
+// open library direct usage usage
+const url = "https://openlibrary.org/isbn/" + isbnVallortigara+".json";
 
 var isbn = require('node-isbn');
 // console.log(isbn.PROVIDER_NAMES)
@@ -16,7 +28,7 @@ var isbn = require('node-isbn');
 // 9788806173104
 // 0735619670
 isbn.provider([isbn.PROVIDER_NAMES.GOOGLE, isbn.PROVIDER_NAMES.OPENLIBRARY/*, isbn.PROVIDER_NAMES.WORLDCAT,  isbn.PROVIDER_NAMES.ISBNDB*/])
-    .resolve('0735619670', function (err, book) {
+    .resolve(isbnVallortigara, function (err, book) {
     if (err) {
         console.log('Book not found', err);
     } else {

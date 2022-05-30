@@ -3,14 +3,16 @@
 const { createWorker, PSM } = require('tesseract.js');
 
 const worker = createWorker({
-    logger: m => console.log(m), // Add logger here
+    logger: function (m) {
+        console.log(m);
+    }
 });
 
 
-module.exports = function (img) {
+module.exports = async function (img) {
 
 
-    (async () => {
+    // (async () => {
         await worker.load();
         await worker.loadLanguage('eng');
         await worker.initialize('eng');
@@ -18,10 +20,11 @@ module.exports = function (img) {
            // tessedit_char_whitelist: '0123456789-',
             // tessedit_pageseg_mode: PSM.PSM_RAW_LINE
         });
-        const { data: { text } } = await worker.recognize(img);
-        console.log(text);
+        const result = await worker.recognize(img);
         await worker.terminate();
-    })();
+
+        return result.data.text;
+    // })();
 
 
 };
